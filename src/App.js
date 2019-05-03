@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TableMainPage from './table-main';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+class App extends React.Component{
+ constructor(props){
+   super(props);
+   this.state={
+    clicks: 0,
+    show: true
+   };
+ }
+
+ calculation=(hh)=>{
+  switch(hh){
+    case "sub":
+      this.setState({ clicks : this.state.clicks - 1}); 
+        break;
+    case "add":
+        this.setState({ clicks : this.state.clicks + 1});
+        break;
+    default:
+      console.log("nothing")
+      break;
+  } }
+ 
+render() {
+  return(
+    <div>
+      <TableMainPage />
+      <div className="text-center pt-5">
+        <button className="btn btn-primary mx-2" onClick={e => this.calculation("add")}>+</button>
+        <h6>{this.state.clicks}</h6>
+        <button className="btn btn-danger mx-2" onClick={e => this.calculation("sub")}>-</button>
+      </div>
     </div>
   );
 }
+
+}
+
 
 export default App;
